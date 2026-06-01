@@ -8,3 +8,5 @@ models/*
 
 output/*
 !output/.gitkeep
+
+iris-offline-docs/
