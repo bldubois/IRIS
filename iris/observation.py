@@ -2172,8 +2172,7 @@ class TransferProcessor(torch.nn.Module):
         These two separate radiative transfer equations take the form
         $$ \frac{dI_\text{continuum}}{ds} = j_\text{dust} - \alpha_\text{dust}I_\text{continuum} $$
         and
-        $$ \frac{dI_\text{total}}{ds} = (j_\text{line} + j_\text{dust}) -
-        (\alpha_\text{line} + \alpha_\text{dust})I_\text{total} \text{ .} $$
+        $$ \frac{dI_\text{total}}{ds} = (j_\text{line} + j_\text{dust}) - (\alpha_\text{line} + \alpha_\text{dust})I_\text{total} \text{ .} $$
         These transfer equations are each solved via the formal, exponential-form solution assuming
         emission and absorption coefficients are radial-stepwise-constant. For low-optical-depth
         cells where the exponential-form solution is numerically unstable, the linear emission-only
@@ -2359,8 +2358,7 @@ class TransferProcessor(torch.nn.Module):
         These two separate radiative transfer equations take the form
         $$ \frac{dI_\text{continuum}}{ds} = j_\text{dust} - \alpha_\text{dust}I_\text{continuum} $$
         and
-        $$ \frac{dI_\text{total}}{ds} = (j_\text{line} + j_\text{dust}) -
-        (\alpha_\text{line} + \alpha_\text{dust})I_\text{total} \text{ .} $$
+        $$ \frac{dI_\text{total}}{ds} = (j_\text{line} + j_\text{dust}) - (\alpha_\text{line} + \alpha_\text{dust})I_\text{total} \text{ .} $$
         Both are stiff ODEs that are susceptible to spontaneous divergence when solved via an explicit
         method such as RK4. Instead, the first step is computed via the Trapezoidal Rule, and the
         remaining steps are computed by Second-Order Backwards Differentiation Formula (BDF2), which are
@@ -2555,8 +2553,7 @@ class TransferProcessor(torch.nn.Module):
         the transfer equations become
         $$ \frac{dI_\text{continuum}}{ds} = j_\text{dust} - \alpha_\text{dust}I_\text{continuum} $$
         and
-        $$ \frac{d\Bar{I}_\text{total}}{ds} = (\Bar{j}_\text{line} + j_\text{dust}) -
-        \Bar{\alpha}_\text{line}I_\text{continuum} - \alpha_\text{dust}\Bar{I}_\text{total} \text{ .} $$
+        $$ \frac{d\Bar{I}_\text{total}}{ds} = (\Bar{j}_\text{line} + j_\text{dust}) - \Bar{\alpha}_\text{line}I_\text{continuum} - \alpha_\text{dust}\Bar{I}_\text{total} \text{ .} $$
         This is a system of two ODEs that are solved in tandem via the formal, exponential-form 
         solution assuming emission and absorption coefficients are radial-stepwise-constant. 
         For low-optical-depth cells where the exponential-form solution is numerically unstable, 
@@ -2707,8 +2704,7 @@ class TransferProcessor(torch.nn.Module):
         the transfer equations become
         $$ \frac{dI_\text{continuum}}{ds} = j_\text{dust} - \alpha_\text{dust}I_\text{continuum} $$
         and
-        $$ \frac{d\Bar{I}_\text{total}}{ds} = (\Bar{j}_\text{line} + j_\text{dust}) -
-        \Bar{\alpha}_\text{line}I_\text{continuum} - \alpha_\text{dust}\Bar{I}_\text{total} \text{ .} $$
+        $$ \frac{d\Bar{I}_\text{total}}{ds} = (\Bar{j}_\text{line} + j_\text{dust}) - \Bar{\alpha}_\text{line}I_\text{continuum} - \alpha_\text{dust}\Bar{I}_\text{total} \text{ .} $$
 
         This is a system of two ODEs that are solved in tandem. Both are stiff equations that
         are each susceptible to spontaneous divergence when solved via an explicit method such as RK4.
