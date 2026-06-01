@@ -1,0 +1,31 @@
+[build-system]
+requires = ['setuptools>=61.0', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'iris'
+version = '1.0.0'
+description = 'Imagery Reversion Informed by Simulation (IRIS)'
+readme = 'README.md'
+requires-python = '>=3.12'
+authors = [{name = 'B.L. DuBois', email = 'brendan@bldubois.com'}]
+classifiers = ['Operating System :: OS Independent', 'Programming Language :: Python :: 3']
+dependencies = ['torch',
+                'numpy',
+                'scipy',
+                'mpi4py',
+                'h5py',
+                'matplotlib',
+                'astropy',
+                'spectral-cube',
+                'reproject']
+
+[project.optional-dependencies]
+cupy = ['cupy-cuda12x @ https://github.com/cupy/cupy/releases/download/v14.0.0a1/cupy_cuda12x-14.0.0a1-cp312-cp312-manylinux2014_x86_64.whl']
+
+[project.urls]
+'Homepage' = 'https://github.com/bldubois/IRIS.git'
+
+[tool.setuptools.packages.find]
+where = ['.']
+include = ['iris*']

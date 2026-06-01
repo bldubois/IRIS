@@ -1,0 +1,38 @@
+site_name: IRIS Docs
+site_author: B.L. DuBois
+copyright: 'Copyright &copy; 2026 University of Connecticut. Created by B.L. DuBois. Licensed under MIT.'
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+nav:
+  - Installation and Usage Guide: guide.md
+  - Developer Reference: reference.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            members_order: source
+            filters: []
+            show_root_heading: true
+            show_root_full_path: true
+            heading_level: 2
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js

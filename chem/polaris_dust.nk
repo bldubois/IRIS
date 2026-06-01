@@ -1,0 +1,19 @@
+# Copyright (c) 2026 University of Connecticut
+# Created by B.L. DuBois
+# SPDX-License-Identifier: MIT
+# See the LICENSE file for details
+
+# A POLARIS dust file generated to reproduce the IRIS dust opacity.
+# See the IRIS paper for details (DuBois et al., 2026).
+
+#string ID
+basic dust
+
+#nr. of wavelength #inc. angles #aspect ratio #density [kg/m^3] #sub.temp #delta #align
+4 1 1 1e3 5e4 0 0
+
+#wavelength #real refractive index #imaginary refractive index
+1e-5 1.0 1.0822e-2
+1e-4 1.0 1.0822e-2
+1e-3 1.0 1.0822e-2
+1e-2 1.0 1.0822e-2

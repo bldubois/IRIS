@@ -1,0 +1,48 @@
+name: Build Offline Docs
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  build-offline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        run: |
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/.ghcup
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install mkdocs-material mkdocstrings[python]
+          pip install . 
+
+      - name: Configure for Offline Viewing
+        run: |
+          echo "use_directory_urls: false" >> mkdocs.yml
+
+      - name: Build Docs
+        run: mkdocs build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-docs-html
+          path: site/
+          retention-days: 5
