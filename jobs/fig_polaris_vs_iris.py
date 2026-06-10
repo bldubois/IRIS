@@ -329,9 +329,8 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
         np.isfinite(dust_mass_density_kg_m3) & (dust_mass_density_kg_m3 > 0),
         dust_mass_density_kg_m3,
         0.)
-    # POLARIS master-basic consumes GRIDratio as n_species / n_gas, despite
-    # the manual describing ID 17 as a molecular mass fraction. Here the
-    # POLARIS gas density is the H2 collider density, so ID 17 is n_13CO / n_H2.
+    # The POLARIS Grid ID 17 (GRIDratio) id defined as n_species / n_gas
+    # Here the POLARIS gas density is the H2 collider density, so ID 17 is n_13CO / n_H2.
     grid_ratio_13co = np.divide(
         n_13co,
         n_H2,

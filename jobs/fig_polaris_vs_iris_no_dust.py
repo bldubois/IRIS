@@ -87,7 +87,7 @@ class TestConfig(hp.Hyper):
 
         self.observer_hyper.lon_pieces = 1
         self.observer_hyper.lat_pieces = 16
-        self.observer_hyper.v_subsamples = 2
+        self.observer_hyper.v_subsamples = 0
         self.observer_hyper.blur_inputs = True
         self.observer_hyper.blur_kernel_r = 3
         self.observer_hyper.blur_kernel_lon = 5
@@ -300,9 +300,6 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
     velocities_m_s = velocities.astype(np.float64) * velocity_m_s
     densities_kg_m3 = densities.astype(np.float64) * density_kg_m3
     temperatures_K = temperatures.astype(np.float64) * hyper.writer_hyper.temperature_K_per_processing
-    T_inf = hyper.observer_hyper.T_inf
-    temperatures_K = np.where(temperatures_K < T_inf, temperatures_K, 0)
-    temperatures_K = np.minimum(temperatures_K, LAMDA_PEAK_COLLISION_TEMPERATURE)
 
     gas_mass_per_H_nucleus = (
         hyper.observer_hyper.m_H
@@ -317,9 +314,8 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
         np.isfinite(h2_mass_density_kg_m3) & (h2_mass_density_kg_m3 > 0),
         h2_mass_density_kg_m3,
         0.)
-    # POLARIS master-basic consumes GRIDratio as n_species / n_gas, despite
-    # the manual describing ID 17 as a molecular mass fraction. Here the
-    # POLARIS gas density is the H2 collider density, so ID 17 is n_13CO / n_H2.
+    # The POLARIS Grid ID 17 (GRIDratio) id defined as n_species / n_gas
+    # Here the POLARIS gas density is the H2 collider density, so ID 17 is n_13CO / n_H2.
     grid_ratio_13co = np.divide(
         n_13co,
         n_H2,
@@ -328,6 +324,7 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
 
     grid_ratio_13co = np.where(np.isfinite(temperatures_K), grid_ratio_13co, 0.)
     temperatures_K = np.where(np.isfinite(temperatures_K), temperatures_K, 0.)
+    temperatures_K = np.minimum(temperatures_K, LAMDA_PEAK_COLLISION_TEMPERATURE)
 
     points = positions.astype(np.float64)
     l_max = 1.005 * 2 * np.max(np.abs(points))
