@@ -76,8 +76,8 @@ class TestConfig(hp.Hyper):
         self.coordinate_hyper.r_steps = 256
         self.coordinate_hyper.r_crop_min_index = 0
         self.coordinate_hyper.r_crop_max_index = 256
-        self.coordinate_hyper.r_min = 7600.
-        self.coordinate_hyper.r_max = 8800.
+        self.coordinate_hyper.r_min = 7677.
+        self.coordinate_hyper.r_max = 8877.
         self.coordinate_hyper.lon_steps = 382
         self.coordinate_hyper.lon_min = -3.
         self.coordinate_hyper.lon_max = 3.
