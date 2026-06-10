@@ -89,7 +89,7 @@ class TestConfig(hp.Hyper):
 
         self.observer_hyper.lon_pieces = 1
         self.observer_hyper.lat_pieces = 16
-        self.observer_hyper.v_subsamples = 0
+        self.observer_hyper.v_subsamples = 2
         self.observer_hyper.blur_inputs = True
         self.observer_hyper.blur_kernel_r = 3
         self.observer_hyper.blur_kernel_lon = 5
