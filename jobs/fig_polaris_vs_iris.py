@@ -1,5 +1,5 @@
 # Copyright (c) 2026 University of Connecticut
-# Created by B.L. DuBois
+# Created by B.L. DuBois, Jonah Baade, Jack Sullivan, and Stefan Reissl
 # SPDX-License-Identifier: MIT
 # See the LICENSE file for details
 
@@ -309,9 +309,6 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
     velocities_m_s = velocities.astype(np.float64) * velocity_m_s
     densities_kg_m3 = densities.astype(np.float64) * density_kg_m3
     temperatures_K = temperatures.astype(np.float64) * hyper.writer_hyper.temperature_K_per_processing
-    T_inf = hyper.observer_hyper.T_inf
-    temperatures_K = np.where(temperatures_K < T_inf, temperatures_K, 0)
-    temperatures_K = np.minimum(temperatures_K, LAMDA_PEAK_COLLISION_TEMPERATURE)
     dust_temperatures_K = dust_temperatures.astype(np.float64) * hyper.writer_hyper.temperature_K_per_processing
 
     gas_mass_per_H_nucleus = (
@@ -343,6 +340,7 @@ def write_polaris_grid(snapshot: arepo_processing.Snapshot,
 
     grid_ratio_13co = np.where(np.isfinite(temperatures_K), grid_ratio_13co, 0.)
     temperatures_K = np.where(np.isfinite(temperatures_K), temperatures_K, 0.)
+    temperatures_K = np.minimum(temperatures_K, LAMDA_PEAK_COLLISION_TEMPERATURE)
 
     points = positions.astype(np.float64)
     l_max = 1.005 * 2 * np.max(np.abs(points))
