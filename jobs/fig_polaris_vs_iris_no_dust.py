@@ -1,5 +1,5 @@
 # Copyright (c) 2026 University of Connecticut
-# Created by B.L. DuBois
+# Created by B.L. DuBois, Jonah Baade, Jack Sullivan, and Stefan Reissl
 # SPDX-License-Identifier: MIT
 # See the LICENSE file for details
 
