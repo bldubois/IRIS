@@ -961,12 +961,12 @@ class CubeHyper(DataClass):
             brightness temperatures or Raleigh-Jeans temperatures in K. Is a list because a separate
             conversion is allowed to be applied to each separate line observation, or conversion can
             be skipped for a specific line if that entry is `None`. Use, for example,
-            [`corrected_antenna_temperature_to_raleigh_jeans_temperature`][iris.cube_process.corrected_antenna_temperature_to_raleigh_jeans_temperature].
+            [`corrected_antenna_temperature_to_raleigh_jeans_temperature`][iris.cube_processing.corrected_antenna_temperature_to_raleigh_jeans_temperature].
             If `None`, no conversions are applied.
             See [`make_cube`][iris.cube_processing.make_cube].
         beam_efficiency: The beam efficiency for conversion from antenna temperature to Raleigh-Jeans
             temperature, if applicable. Set to `None` if no conversion is required.
-            See [`corrected_antenna_temperature_to_raleigh_jeans_temperature`][iris.cube_process.corrected_antenna_temperature_to_raleigh_jeans_temperature].
+            See [`corrected_antenna_temperature_to_raleigh_jeans_temperature`][iris.cube_processing.corrected_antenna_temperature_to_raleigh_jeans_temperature].
         clean_noise: A list of length `n_lines` of callables (function pointers)
             that each accept as arguments `cube, hyper` and return a processed `clean_cube`. The arg
             `cube` is assumed to be a spectral line observation as a `torch.float32` tensor

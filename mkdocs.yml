@@ -10,7 +10,15 @@ theme:
 
 nav:
   - Installation and Usage Guide: guide.md
-  - Developer Reference: reference.md
+  - Hyperparameters: reference/hyper.md
+  - AREPO Processing: reference/arepo_processing.md
+  - AREPO Dataset Writing: reference/arepo_processing_write.md
+  - Cube Processing: reference/cube_processing.md
+  - Chemistry: reference/chemistry.md
+  - Observation: reference/observation.md
+  - Reversion: reference/reversion.md
+  - Training: reference/training.md
+  - Visualization: reference/visualization.md
 
 plugins:
   - search
