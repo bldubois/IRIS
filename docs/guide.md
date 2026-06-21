@@ -1,6 +1,7 @@
 # IRIS Documentation
 
 **Author:** B.L. DuBois
+**Updated:** 1 July 2026
 
 Welcome to the official IRIS documentation. In the other tabs of this page, you can
 find a detailed description of the entire IRIS sourcecode for future developers.
@@ -8,7 +9,7 @@ In the sections below, you can find a guide for installation and usage of the IR
 This guide is intended for those aiming to reproduce the results of the IRIS paper,
 or for those collaborating on future research relating to the IRIS project.
 
-## 2. Installation
+## 1. Installation
 
 To begin, clone the IRIS code onto your local machine by running:
 
@@ -35,7 +36,7 @@ bash create_venv.sh
 
 IRIS is now on your machine.
 
-## 3. Data Generation
+## 2. Data Generation
 
 Now that we have IRIS on our machine, we will want to produce data for training
 the IRIS reversion model, testing the trained model, and visualizing results.
@@ -71,7 +72,7 @@ Note that these scripts are configured to adopt the units from the primary train
 Units consistency is not strictly necessary, however, since units conversion
 between datasets is managed dynamically by the IRIS code.
 
-## 4. A Note on Synthetic Observation
+## 3. A Note on Synthetic Observation
 
 The IRIS code provides a highly general synthetic-observation capability for AREPO simulations.
 See the documentation and IRIS paper for more details on capabilities of the synthetic observation
@@ -82,7 +83,7 @@ from their simulations to `iris.arepo_processing.StandardDataset` objects. The d
 IRIS project leave open the possibility of releasing a more general version of the IRIS
 synthetic observation code as its own Python package in the future.
 
-## 5. Model Training
+## 4. Model Training
 
 Now that we have a training dataset, let's train the IRIS reversion model.
 Be sure to edit the `jobs/train.py` script to include paths to your training data,
@@ -95,7 +96,7 @@ in the SLURM file. Once ready, navigate to `jobs/` and run:
 sbatch train.sh
 ```
 
-## 6. Visualizing Results
+## 5. Visualizing Results
 
 We now have a trained IRIS model. To generate all the figures included in the IRIS paper,
 first update all the figure scripts and SLURM files in `jobs/` to include the relevant paths
@@ -148,7 +149,7 @@ Then run:
 sbatch fig_true_reversions.sh
 ```
 
-## 7. Conclusion
+## 6. Conclusion
 
 You've now reproduced all the results of the IRIS paper.
 For more information on the IRIS project, or on contacting its creators regarding
