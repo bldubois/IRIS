@@ -21,6 +21,8 @@ dependencies = ['torch',
                 'reproject']
 
 [project.optional-dependencies]
+# If using optional pre-release CuPy support, update the WHL URL below
+# according to the requirements of your local machine.
 cupy = ['cupy-cuda12x @ https://github.com/cupy/cupy/releases/download/v14.0.0a1/cupy_cuda12x-14.0.0a1-cp312-cp312-manylinux2014_x86_64.whl']
 
 [project.urls]

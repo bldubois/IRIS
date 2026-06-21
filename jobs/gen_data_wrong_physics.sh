@@ -15,6 +15,9 @@
 #SBATCH --gres=gpu:2
 #SBATCH --constraint="a100"
 
+# By default, the below command sets up an in-RAM directory for downloading
+# AREPO snapshots from a remote server. The in-RAM directory yields the fastest download
+# and disk read/write times. To use a persistent directory on disk, change the path below:
 LOCAL_DATA_DIR="/dev/shm/job_data_${SLURM_JOB_ID}"
 mkdir -p "$LOCAL_DATA_DIR"
 PID=0
@@ -34,6 +37,7 @@ function winddown
 trap winddown EXIT SIGTERM SIGINT
 
 module purge
+# Set this to a suitable openmpi distribution on your local machine:
 module load openmpi/5.0.5-noucx
 source ~/IRIS/iris_venv/bin/activate
 mpirun python gen_data_wrong_physics.py "$LOCAL_DATA_DIR" &

@@ -21,8 +21,9 @@ from iris import arepo_processing as ap
 n = os.getenv('SLURM_ARRAY_TASK_ID')
 hyper = hp.SEDIGISM_13C16O()
 hyper.validate()
-paths = ['/path/to/training_data_1', '/path/to/training_data_2']
-litter_path = ['/path/to/litter_data_1', '/path/to/litter_data_2']
+# Update the below paths according to your training data:
+paths = [f'/path/to/training_data_{i + 1}' for i in range(80)]
+litter_path = [f'/path/to/litter_data_{i + 1}' for i in range(8)]
 
 reader = ap.Reader(path=paths,
                    hyper=hyper,
