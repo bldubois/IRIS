@@ -17,7 +17,7 @@ from iris import arepo_processing_write as ap
 
 
 local_cache = sys.argv[1]
-hyper = hp.SEDIGISM_13C16O()
+hyper = hp.SEDIGISM_13C16O(r_steps=2048)
 hyper.writer_hyper.points_per_snapshot = 1
 hyper.dataset_hyper.CMZ_scale_factor = None
 hyper.dataset_hyper.CMZ_scale_range = None

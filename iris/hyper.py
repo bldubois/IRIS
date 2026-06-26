@@ -1184,9 +1184,14 @@ class SEDIGISM_13C16O(Hyper):
                adsurl = {https://ui.adsabs.harvard.edu/abs/2024A&A...683A..40D},
               adsnote = {Provided by the SAO/NASA Astrophysics Data System}
         }
+
+    Args:
+        r_steps: Sets `self.coordinate_hyper.r_steps`.
     """
-    def __init__(self) -> None:
+    def __init__(self, r_steps: int = 512) -> None:
         super().__init__()
+        self.coordinate_hyper.r_steps = r_steps
+        self.coordinate_hyper.r_pieces = int(np.ceil(r_steps / 2048))
         self.coordinate_hyper.r_min = 8052.
         self.coordinate_hyper.r_max = 8502.
         self.coordinate_hyper.lon_min = -1.5

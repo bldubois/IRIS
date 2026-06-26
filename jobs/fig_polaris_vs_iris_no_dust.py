@@ -73,9 +73,9 @@ class TestConfig(hp.Hyper):
         self.coordinate_hyper.theta_zero = 270.
         self.coordinate_hyper.spin_orientation = -1
         self.coordinate_hyper.observer_radius = 8277.
-        self.coordinate_hyper.r_steps = 256
+        self.coordinate_hyper.r_steps = 2048
         self.coordinate_hyper.r_crop_min_index = 0
-        self.coordinate_hyper.r_crop_max_index = 256
+        self.coordinate_hyper.r_crop_max_index = 2048
         self.coordinate_hyper.r_min = 7677.
         self.coordinate_hyper.r_max = 8877.
         self.coordinate_hyper.lon_steps = 382
@@ -85,7 +85,7 @@ class TestConfig(hp.Hyper):
         self.coordinate_hyper.lat_min = -1.
         self.coordinate_hyper.lat_max = 1.
 
-        self.observer_hyper.lon_pieces = 1
+        self.observer_hyper.lon_pieces = 8
         self.observer_hyper.lat_pieces = 16
         self.observer_hyper.v_subsamples = 2
         self.observer_hyper.blur_inputs = True

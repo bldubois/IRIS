@@ -12,7 +12,7 @@ from iris import arepo_processing as ap
 from iris import visualization as vz
 
 
-hyper = hp.SEDIGISM_13C16O()
+hyper = hp.SEDIGISM_13C16O(r_steps=2048)
 hyper.observer_hyper.out_blur_fwhm = None
 hyper.validate()
 reader = ap.Reader(path='/path/to/sims_overview_data',

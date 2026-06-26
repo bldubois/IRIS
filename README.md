@@ -25,7 +25,7 @@ IRIS was created by B.L. DuBois at the University of Connecticut's Milky Way Lab
 All design and implementation of the primary code is due to B.L. DuBois.
 
 Jonah Baade, Jack Sullivan, and Stefan Reissl&mdash;co-authors on the
-IRIS paper&mdash;helped write code for one of the paper's critical figures, comparing
+IRIS paper&mdash;helped write code for one of the paper's figures, comparing
 synthetic observations produced by IRIS to those produced by the synthetic observation
 code POLARIS (https://github.com/polaris-MCRT/POLARIS). This figure code is contained
 in the scripts `jobs/fig_polaris_vs_iris.py` and `jobs/fig_polaris_vs_iris_no_dust.py`.

@@ -12,7 +12,7 @@ from iris import arepo_processing as ap
 from iris import visualization as vz
 
 
-hyper = hp.SEDIGISM_13C16O()
+hyper = hp.SEDIGISM_13C16O(r_steps=2048)
 title = 'no_dust_vs_dust'
 dust_name = 'Standard Dust Opacity'
 color_scale_center = 0
