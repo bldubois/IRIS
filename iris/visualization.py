@@ -1839,7 +1839,7 @@ def reversion(fig: typing.Any,
        cax=observed_cbar_ax,
        cbar_label='Mean Raleigh-Jeans Temperature (K)',
        cbar_orientation='horizontal',
-       cbar_ticks=(-0.1, 0.0, 0.1, 0.25, 1.0, 2.0))
+       cbar_ticks=(-0.1, 0.0, 0.1, 0.3, 1.0, 2.0))
 
     shift_axes(top_down_cax, dx=-0.0750, dy=0.0063)
     shift_axes(arepo_top_down_ax, dx=-0.0163, dy=0.0063)
