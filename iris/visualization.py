@@ -1237,6 +1237,7 @@ def compute_synthetic_reversions(reverter: typing.Any,
         full_cone_hyper.observer_hyper.lon_pieces *= 2
     else:
         full_cone_hyper.observer_hyper.lon_pieces *= 4
+    full_cone_hyper.observer_hyper.noise_sigma = 0.6
     reverter.cuda()
     reverter.eval()
 
@@ -1830,13 +1831,15 @@ def reversion(fig: typing.Any,
        hyper=hyper,
        title=r'Synthetic $^{13}$CO(2-1) Observation (IRIS)',
        color_bar=True,
-       color_scale=2e2,
-       color_scale_center=0,
+       color_scale=1e2,
+       color_scale_center=0.035,
+       color_norm_min=-0.1,
+       color_norm_max=2.0,
        pin_color_scale_to=None,
        cax=observed_cbar_ax,
        cbar_label='Mean Raleigh-Jeans Temperature (K)',
        cbar_orientation='horizontal',
-       cbar_ticks=(0.0, 0.1, 1.0, 2.5, 5.0))
+       cbar_ticks=(-0.1, 0.0, 0.1, 0.25, 1.0, 2.0))
 
     shift_axes(top_down_cax, dx=-0.0750, dy=0.0063)
     shift_axes(arepo_top_down_ax, dx=-0.0163, dy=0.0063)
