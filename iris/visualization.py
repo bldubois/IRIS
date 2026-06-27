@@ -148,7 +148,7 @@ def sims_overview(snapshot_path: PathLike,
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
     simply_observed = simple(arepo, units='vrho SI')
-    simply_observed *= density_conversion
+    simply_observed *= density_conversion * parsec / 1000
     simply_observed = simply_observed.detach().cpu().numpy()[0][0]
 
     fig = plt.figure(figsize=(15.55, 3.5))
@@ -175,6 +175,9 @@ def sims_overview(snapshot_path: PathLike,
                   ax=fig.add_subplot(wide_top_down_spec),
                   hyper=hyper,
                   label=r'H$_2$ $z$-Column Density' + '\n(AREPO)',
+                  color_scale=None,
+                  color_norm_min=0,
+                  color_norm_max=1e4,
                   color_bar=True,
                   cax=fig.add_subplot(wide_top_down_cbar_spec),
                   cbar_label=r'H$_2$ Column Density ($M_\odot / \text{pc}^2$)',
@@ -200,10 +203,13 @@ def sims_overview(snapshot_path: PathLike,
        hyper=hyper,
        title='Density-Tracing (IRIS)',
        color_bar=True,
-       color_scale=None,
-       pin_color_scale_to=None,
+       color_scale=5e8,
+       color_scale_center=0,
+       color_norm_min=0,
+       color_norm_max=1e-6,
        cax=fig.add_subplot(simple_cbar_spec),
-       cbar_label='Mean Column Density\n' +  r'Per Unit Velocity ($M_\odot \, \text{s} / \text{pc}^3$)',
+       cbar_label='Mean Column Density\n' +
+                  r'Per Unit Velocity ($\, M_\odot \, \text{s} \, / \, [\text{pc}^2 \, \text{km}] \,$)',
        cbar_orientation='vertical',
        l_ticks=False,
        b_ticks=False)
@@ -212,8 +218,10 @@ def sims_overview(snapshot_path: PathLike,
        hyper=hyper,
        title='',
        color_bar=False,
-       color_scale=None,
-       pin_color_scale_to=None,
+       color_scale=5e8,
+       color_scale_center=0,
+       color_norm_min=0,
+       color_norm_max=1e-6,
        cax=None,
        l_ticks=True,
        v_ticks=False)
@@ -273,7 +281,7 @@ def side_by_side(arepo_top_down: ArrayLike,
              color_norm_max=100.0,
              cbar_ticks=(0, 1.0, 10.0, 100.0),
              cax=fig.add_subplot(top_down_cbar_spec),
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              observer_arrow_offset=observer_arrow_offset,
              l_ticks=True,
              r_ticks=True,
@@ -780,7 +788,7 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
     simply_observed = simple(arepo, units='vrho SI')
-    simply_observed *= density_conversion
+    simply_observed *= density_conversion * parsec / 1000
     simply_observed = simply_observed.detach().cpu().numpy()[0][0]
     synth_observed = observer(arepo, units='Trj K')
     synth_observed = synth_observed.detach().cpu().numpy()[0][0]
@@ -828,10 +836,13 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
        hyper=hyper,
        title=r'Density-Tracing (IRIS)',
        color_bar=True,
-       color_scale=None,
-       pin_color_scale_to=None,
+       color_scale=5e8,
+       color_scale_center=0,
+       color_norm_min=0,
+       color_norm_max=1e-6,
        cax=fig.add_subplot(simple_cbar_spec),
-       cbar_label='Mean Column Density\n' + r'Per Unit Velocity ($M_\odot \, \text{s} / \text{pc}^3$)',
+       cbar_label='Mean Column Density\n' +
+                  r'Per Unit Velocity ($\, M_\odot \, \text{s} \, / \, [\text{pc}^2 \, \text{km}] \,$)',
        cbar_orientation='vertical',
        l_ticks=False,
        b_ticks=True)
@@ -840,8 +851,10 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
        hyper=hyper,
        title='',
        color_bar=False,
-       color_scale=None,
-       pin_color_scale_to=None,
+       color_scale=5e8,
+       color_scale_center=0,
+       color_norm_min=0,
+       color_norm_max=1e-6,
        cax=None,
        l_ticks=True,
        v_ticks=True)
@@ -1374,7 +1387,12 @@ def failure_modes(reverter: typing.Any,
               dataset=None,
               observer=None,
               top_down_path=None,
+              top_down_color_scale=10.0,
+              top_down_color_norm_min=0,
+              top_down_color_norm_max=10.0,
+              top_down_cbar_ticks=(0, 0.1, 1.0, 10.0),
               observed_path=None,
+              observed_title='Pure-Noise Synthetic Observation',
               noise=noise,
               litter=None,
               hyper=hyper)
@@ -1744,7 +1762,12 @@ def reversion(fig: typing.Any,
               dataset: ap.Dataset | ap.ConcatDataset | None = None,
               observer: ob.Observer | None = None,
               top_down_path: PathLike | None = None,
+              top_down_color_scale: float | None = 10.0,
+              top_down_color_norm_min: float | None= 0,
+              top_down_color_norm_max: float | None = 100.0,
+              top_down_cbar_ticks: typing.Sequence[float] | None = (0, 1.0, 10.0, 100.0),
               observed_path: PathLike | None = None,
+              observed_title: str = r'Synthetic $^{13}$CO(2-1) Observation (IRIS)',
               noise: typing.Any | None = None,
               litter: typing.Any | None = None,
               hyper: hp.Hyper | None = None) -> typing.Any:
@@ -1763,7 +1786,6 @@ def reversion(fig: typing.Any,
     density_conversion = solar_mass / parsec / parsec / parsec
     density *= density_conversion
 
-    blank = False
     if top_down_path is not None and observed_path is not None:
         arepo_top_down = np.load(os.path.expanduser(top_down_path))[0][0] / density
         observed = np.load(os.path.expanduser(observed_path))
@@ -1773,7 +1795,6 @@ def reversion(fig: typing.Any,
         else:
             observed_lv = observed
     elif dataset is None:
-        blank = True
         r_steps = hyper.coordinate_hyper.r_steps
         lon_steps = hyper.coordinate_hyper.lon_steps
         v_steps = hyper.cube_hyper.v_steps
@@ -1846,11 +1867,12 @@ def reversion(fig: typing.Any,
              ax=arepo_top_down_ax,
              hyper=hyper,
              label=r'Top-Down H$_2$ Density' + '\n(AREPO)',
-             color_scale=10.0,
-             color_norm_min=0,
-             color_norm_max=100.0,
-             cbar_ticks=(0, 1.0, 10.0, 100.0),
-             color_bar=not blank,
+             color_scale=top_down_color_scale,
+             color_norm_min=top_down_color_norm_min,
+             color_norm_max=top_down_color_norm_max,
+             cbar_ticks=top_down_cbar_ticks,
+             pin_color_scale_to=np.stack((arepo_top_down, reverted_top_down)),
+             color_bar=True,
              cax=top_down_cax,
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
@@ -1859,20 +1881,19 @@ def reversion(fig: typing.Any,
              ax=reverted_top_down_ax,
              hyper=hyper,
              label='Top-Down H$_2$ Density' + '\n(IRIS Reconstructed)',
-             color_scale=10.0,
-             color_norm_min=0,
-             color_norm_max=100.0,
-             cbar_ticks=(0, 1.0, 10.0, 100.0),
-             color_bar=blank,
-             cax=top_down_cax,
-             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
+             color_scale=top_down_color_scale,
+             color_norm_min=top_down_color_norm_min,
+             color_norm_max=top_down_color_norm_max,
+             cbar_ticks=top_down_cbar_ticks,
+             pin_color_scale_to=np.stack((arepo_top_down, reverted_top_down)),
+             color_bar=False,
              l_ticks=True,
              r_ticks=True)
 
     lv(observed=observed_lv,
        ax=observed_ax,
        hyper=hyper,
-       title=r'Synthetic $^{13}$CO(2-1) Observation (IRIS)',
+       title=observed_title,
        color_bar=True,
        color_scale=1e2,
        color_scale_center=0.035,
@@ -1925,6 +1946,8 @@ def wide_top_down(snapshot_path: PathLike,
                   theta: float = -90,
                   label: str = r'$\rho$',
                   color_scale: float | None = None,
+                  color_norm_min: float | None = None,
+                  color_norm_max: float | None = None,
                   pin_color_scale_to: ArrayLike | None = None,
                   color_bar: bool = False,
                   cax: typing.Any | None = None,
@@ -1935,8 +1958,8 @@ def wide_top_down(snapshot_path: PathLike,
     arepo_wide_top_down = snapshot.make_wide_top_down(resolution=resolution, box_size=box_size)
     solar_mass = 1.988e30
     parsec = hyper.dataset_hyper.meters_per_parsec
-    density = parsec / parsec / solar_mass
-    arepo_wide_top_down *= density
+    column_density = solar_mass / parsec / parsec
+    arepo_wide_top_down /= column_density
     #arepo_wide_top_down = np.zeros(resolution[:2], dtype=np.float32)
     box_size /= 1000
     observer_radius = hyper.coordinate_hyper.observer_radius / 1000
@@ -1953,8 +1976,10 @@ def wide_top_down(snapshot_path: PathLike,
     else:
         density_color_scale = pin_color_scale_to
 
-    color_norm_min = density_color_scale.min()
-    color_norm_max = density_color_scale.max()
+    if color_norm_min is None:
+        color_norm_min = density_color_scale.min()
+    if color_norm_max is None:
+        color_norm_max = density_color_scale.max()
 
     if color_scale is None:
         color_scale = 100 / np.mean(density_color_scale)
@@ -2089,7 +2114,7 @@ def top_down(density: ArrayLike,
              cbar_label: str | None = None,
              cbar_orientation: str = 'vertical',
              cbar_ticks: typing.Sequence[float] | None = None,
-             cbar_log_tick_labels: bool = False,
+             cbar_log_tick_labels: bool = True,
              l_ticks: bool = True,
              r_ticks: bool = True,
              r_label: str = r'$r$ (kpc to observer)',

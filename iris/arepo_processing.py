@@ -3718,7 +3718,7 @@ class Snapshot:
 
         interpolator = CPUNearestNDInterpolator(self.positions, rho_H2)
         densities = interpolator(grid)
-        densities = np.sum(densities, axis=2)
+        densities = np.mean(densities, axis=2) * box_size
         if SI:
             length_SI_per_processing = self.hyper.writer_hyper.length_cm_per_processing / 100
             mass_SI_per_processing = self.hyper.writer_hyper.mass_g_per_processing / 1000

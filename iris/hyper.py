@@ -1200,8 +1200,8 @@ class SEDIGISM_13C16O(Hyper):
         self.coordinate_hyper.lat_min = -.375
         self.coordinate_hyper.lat_max = .375
 
-        self.observer_hyper.lon_pieces = 8
-        self.observer_hyper.lat_pieces = 4
+        self.observer_hyper.lon_pieces = int(np.ceil(r_steps / 512)) * (2 if r_steps > 512 else 1)
+        self.observer_hyper.lat_pieces = 32
         self.observer_hyper.v_subsamples = 1
         self.observer_hyper.noise_mean = 0.
         self.observer_hyper.noise_sigma = 1.
