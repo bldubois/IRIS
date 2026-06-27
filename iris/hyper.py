@@ -1191,6 +1191,7 @@ class SEDIGISM_13C16O(Hyper):
     def __init__(self, r_steps: int = 512) -> None:
         super().__init__()
         self.coordinate_hyper.r_steps = r_steps
+        self.coordinate_hyper.r_crop_max_index = r_steps
         self.coordinate_hyper.r_pieces = int(np.ceil(r_steps / 2048))
         self.coordinate_hyper.r_min = 8052.
         self.coordinate_hyper.r_max = 8502.
