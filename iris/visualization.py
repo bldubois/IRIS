@@ -140,10 +140,15 @@ def sims_overview(snapshot_path: PathLike,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
     simply_observed = simple(arepo, units='vrho SI')
+    simply_observed *= density_conversion
     simply_observed = simply_observed.detach().cpu().numpy()[0][0]
 
     fig = plt.figure(figsize=(15.55, 3.5))
@@ -172,7 +177,7 @@ def sims_overview(snapshot_path: PathLike,
                   label=r'H$_2$ $z$-Column Density' + '\n(AREPO)',
                   color_bar=True,
                   cax=fig.add_subplot(wide_top_down_cbar_spec),
-                  cbar_label=r'H$_2$ Column Density ($\text{kg} / \text{m}^2$)',
+                  cbar_label=r'H$_2$ Column Density ($M_\odot / \text{pc}^2$)',
                   x_ticks=True,
                   y_ticks=True)
 
@@ -182,7 +187,7 @@ def sims_overview(snapshot_path: PathLike,
              label=r'H$_2$ Latitude-Mean Density' + '\n(AREPO CMZ)',
              color_bar=True,
              cax=fig.add_subplot(top_down_cbar_spec),
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
              r_ticks=True)
 
@@ -194,7 +199,7 @@ def sims_overview(snapshot_path: PathLike,
        color_scale=None,
        pin_color_scale_to=None,
        cax=fig.add_subplot(simple_cbar_spec),
-       cbar_label='Mean Column Density\n' +  r'Per Unit Velocity ($\text{kg} \, \text{s} / \text{m}^3$)',
+       cbar_label='Mean Column Density\n' +  r'Per Unit Velocity ($M_\odot \, \text{s} / \text{pc}^3$)',
        cbar_orientation='vertical',
        l_ticks=False,
        b_ticks=False)
@@ -375,6 +380,10 @@ def iris_side_by_side(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -419,6 +428,10 @@ def external_side_by_side(dataset: ap.Dataset | ap.ConcatDataset,
     length = left_hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = left_hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, left_hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -461,6 +474,10 @@ def optically_thin_vs_thick(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -499,6 +516,10 @@ def no_dust_vs_dust(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -551,6 +572,10 @@ def balance_OT_background(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -606,6 +631,10 @@ def formal_vs_smooth(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -644,6 +673,10 @@ def continuum_temperature(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
@@ -671,7 +704,7 @@ def continuum_temperature(dataset: ap.Dataset | ap.ConcatDataset,
              label='Top-Down Density\n(AREPO)',
              color_bar=True,
              cax=fig.add_subplot(top_down_cbar_spec),
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              observer_arrow_offset=.20,
              l_ticks=True,
              r_ticks=True,
@@ -727,10 +760,15 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
     length = hyper.dataset_hyper._length_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     arepo_top_down = ap.columnize_physical_tensor(arepo, hyper) / density
     arepo_top_down = arepo_top_down.detach().cpu().numpy()[0][0]
     simply_observed = simple(arepo, units='vrho SI')
+    simply_observed *= density_conversion
     simply_observed = simply_observed.detach().cpu().numpy()[0][0]
     synth_observed = observer(arepo, units='Trj K')
     synth_observed = synth_observed.detach().cpu().numpy()[0][0]
@@ -764,7 +802,7 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
              label='Top-Down Density\n(AREPO)',
              color_bar=True,
              cax=fig.add_subplot(top_down_cbar_spec),
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
              r_ticks=True,
              r_label=r'$r$ (kpc to observer)')
@@ -777,7 +815,7 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
        color_scale=None,
        pin_color_scale_to=None,
        cax=fig.add_subplot(simple_cbar_spec),
-       cbar_label='Mean Column Density\n' + r'Per Unit Velocity ($\text{kg} \, \text{s} / \text{m}^3$)',
+       cbar_label='Mean Column Density\n' + r'Per Unit Velocity ($M_\odot \, \text{s} / \text{pc}^3$)',
        cbar_orientation='vertical',
        l_ticks=False,
        b_ticks=True)
@@ -1351,6 +1389,10 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
     temperature = hyper.dataset_hyper._temperature_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     true_observation = cube_processing.make_default_cube(hyper)
     true_observation = true_observation.cuda()
@@ -1395,7 +1437,7 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
              label='Top-Down Density\n(Model 1 Reversion)',
              color_bar=True,
              cax=top_down_cax,
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              cbar_orientation='horizontal',
              l_ticks=True,
              r_ticks=False)
@@ -1490,6 +1532,10 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
     temperature = hyper.dataset_hyper._temperature_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     true_observation = cube_processing.make_default_cube(hyper)
     true_observation = true_observation.cuda()
@@ -1534,7 +1580,7 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
              label='Top-Down Density\n(Model 1 Reversion)',
              color_bar=True,
              cax=top_down_cax,
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              cbar_orientation='horizontal',
              l_ticks=True,
              r_ticks=False,
@@ -1674,6 +1720,10 @@ def reversion(fig: typing.Any,
     temperature = hyper.dataset_hyper._temperature_iris_per_SI
     volume = length * length * length
     density = mass / volume
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density_conversion = solar_mass / parsec / parsec / parsec
+    density *= density_conversion
 
     blank = False
     if top_down_path is not None and observed_path is not None:
@@ -1761,7 +1811,7 @@ def reversion(fig: typing.Any,
              pin_color_scale_to=reverted_top_down if blank else None,
              color_bar=not blank,
              cax=top_down_cax,
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
              r_ticks=False)
     top_down(density=reverted_top_down,
@@ -1771,7 +1821,7 @@ def reversion(fig: typing.Any,
              pin_color_scale_to=None if blank else arepo_top_down,
              color_bar=blank,
              cax=top_down_cax,
-             cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
+             cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
              r_ticks=True)
 
@@ -1780,13 +1830,13 @@ def reversion(fig: typing.Any,
        hyper=hyper,
        title=r'Synthetic $^{13}$CO(2-1) Observation (IRIS)',
        color_bar=True,
-       color_scale=10.0,
-       color_scale_center=0.0,
+       color_scale=2e2,
+       color_scale_center=0,
        pin_color_scale_to=None,
        cax=observed_cbar_ax,
        cbar_label='Mean Raleigh-Jeans Temperature (K)',
        cbar_orientation='horizontal',
-       cbar_ticks=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0])
+       cbar_ticks=(0.0, 0.1, 1.0, 2.5, 5.0))
 
     shift_axes(top_down_cax, dx=-0.0750, dy=0.0063)
     shift_axes(arepo_top_down_ax, dx=-0.0163, dy=0.0063)
@@ -1837,6 +1887,10 @@ def wide_top_down(snapshot_path: PathLike,
                   y_ticks: bool = True) -> None:
     snapshot = ap.Snapshot(snapshot_path, hyper)
     arepo_wide_top_down = snapshot.make_wide_top_down(resolution=resolution, box_size=box_size)
+    solar_mass = 1.988e30
+    parsec = hyper.dataset_hyper.meters_per_parsec
+    density = parsec / parsec / solar_mass
+    arepo_wide_top_down *= density
     #arepo_wide_top_down = np.zeros(resolution[:2], dtype=np.float32)
     box_size /= 1000
     observer_radius = hyper.coordinate_hyper.observer_radius / 1000
