@@ -186,6 +186,10 @@ def sims_overview(snapshot_path: PathLike,
              hyper=hyper,
              label=r'H$_2$ Latitude-Mean Density' + '\n(AREPO CMZ)',
              color_bar=True,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              cax=fig.add_subplot(top_down_cbar_spec),
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
@@ -264,6 +268,10 @@ def side_by_side(arepo_top_down: ArrayLike,
              hyper=hyper,
              label='Top-Down Density\n(AREPO)',
              color_bar=True,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              cax=fig.add_subplot(top_down_cbar_spec),
              cbar_label=r'H$_2$ Density ($\text{kg} / \text{m}^3$)',
              observer_arrow_offset=observer_arrow_offset,
@@ -703,6 +711,10 @@ def continuum_temperature(dataset: ap.Dataset | ap.ConcatDataset,
              hyper=hyper,
              label='Top-Down Density\n(AREPO)',
              color_bar=True,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              cax=fig.add_subplot(top_down_cbar_spec),
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              observer_arrow_offset=.20,
@@ -801,6 +813,10 @@ def simple_vs_synth(dataset: ap.Dataset | ap.ConcatDataset,
              hyper=hyper,
              label='Top-Down Density\n(AREPO)',
              color_bar=True,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              cax=fig.add_subplot(top_down_cbar_spec),
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              l_ticks=True,
@@ -1437,6 +1453,11 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
              hyper=hyper,
              label='Top-Down Density\n(Model 1 Reversion)',
              color_bar=True,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
+             cbar_ticks=(0, 1.0, 2.5, 5.0, 10.0),
+             cbar_log_tick_labels=False,
              cax=top_down_cax,
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              cbar_orientation='horizontal',
@@ -1446,8 +1467,10 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
              ax=top_right_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 2 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=True)
@@ -1455,8 +1478,10 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
              ax=bottom_left_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 3 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=False)
@@ -1464,8 +1489,10 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
              ax=bottom_right_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 4 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=True)
@@ -1475,13 +1502,13 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
        hyper=hyper,
        title=r'SEDIGISM $^{13}$CO(2-1) Data',
        color_bar=True,
-       color_scale=5e0,
+       color_scale=5.0,
        color_scale_center=0.5,
        pin_color_scale_to=None,
        cax=sedigism_cax,
        cbar_label='Mean Raleigh-Jeans Temperature (K)',
        cbar_orientation='horizontal',
-       cbar_ticks=[0.0, 0.5, 1.0, 1.5, 2.0, 2.5])
+       cbar_ticks=(0.0, 0.5, 1.0, 1.5, 2.0, 2.5))
 
     shift_axes(top_left_reversion_ax, dx=0.01, dy=0)
     shift_axes(bottom_left_reversion_ax, dx=0.01, dy=0)
@@ -1502,8 +1529,8 @@ def true_reversions(reverters: typing.Sequence[typing.Any],
                                       mutation_scale=40,
                                       zorder=10)
     fig.patches.append(arrow_1)
-    arrow_2 = patches.FancyArrowPatch((0.716, 0.335),
-                                      (0.716, 0.375),
+    arrow_2 = patches.FancyArrowPatch((0.687, 0.335),
+                                      (0.687, 0.375),
                                       transform=fig.transFigure,
                                       facecolor=orange_arrow_color,
                                       edgecolor=purple_arrow_color,
@@ -1580,6 +1607,10 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
              hyper=hyper,
              label='Top-Down Density\n(Model 1 Reversion)',
              color_bar=True,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
+             cbar_ticks=(0, 1.0, 2.5, 5.0, 10.0),
              cax=top_down_cax,
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
              cbar_orientation='horizontal',
@@ -1592,8 +1623,10 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
              ax=top_right_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 2 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=True,
@@ -1604,8 +1637,10 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
              ax=bottom_left_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 3 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=False,
@@ -1616,8 +1651,10 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
              ax=bottom_right_reversion_ax,
              hyper=hyper,
              label='Top-Down Density\n(Model 4 Reversion)',
-             pin_color_scale_to=reversions[0],
              color_bar=False,
+             color_scale=2.0,
+             color_norm_min=0,
+             color_norm_max=10.0,
              cax=None,
              l_ticks=True,
              r_ticks=True,
@@ -1630,13 +1667,13 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
        hyper=hyper,
        title=r'SEDIGISM $^{13}$CO(2-1) Data',
        color_bar=True,
-       color_scale=5e0,
+       color_scale=5.0,
        color_scale_center=0.5,
        pin_color_scale_to=None,
        cax=sedigism_cax,
        cbar_label='Mean Raleigh-Jeans Temperature (K)',
        cbar_orientation='horizontal',
-       cbar_ticks=[0.0, 0.5, 1.0, 1.5, 2.0, 2.5])
+       cbar_ticks=(0.0, 0.5, 1.0, 1.5, 2.0, 2.5))
 
     shift_axes(top_left_reversion_ax, dx=0.01, dy=0)
     shift_axes(bottom_left_reversion_ax, dx=0.01, dy=0)
@@ -1657,8 +1694,8 @@ def true_reversions_orbits(reverters: typing.Sequence[typing.Any],
                                       mutation_scale=40,
                                       zorder=10)
     fig.patches.append(arrow_1)
-    arrow_2 = patches.FancyArrowPatch((0.716, 0.335),
-                                      (0.716, 0.375),
+    arrow_2 = patches.FancyArrowPatch((0.687, 0.335),
+                                      (0.687, 0.375),
                                       transform=fig.transFigure,
                                       facecolor=orange_arrow_color,
                                       edgecolor=purple_arrow_color,
@@ -1809,7 +1846,10 @@ def reversion(fig: typing.Any,
              ax=arepo_top_down_ax,
              hyper=hyper,
              label=r'Top-Down H$_2$ Density' + '\n(AREPO)',
-             pin_color_scale_to=reverted_top_down if blank else None,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              color_bar=not blank,
              cax=top_down_cax,
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
@@ -1819,7 +1859,10 @@ def reversion(fig: typing.Any,
              ax=reverted_top_down_ax,
              hyper=hyper,
              label='Top-Down H$_2$ Density' + '\n(IRIS Reconstructed)',
-             pin_color_scale_to=None if blank else arepo_top_down,
+             color_scale=10.0,
+             color_norm_min=0,
+             color_norm_max=100.0,
+             cbar_ticks=(0, 1.0, 10.0, 100.0),
              color_bar=blank,
              cax=top_down_cax,
              cbar_label=r'H$_2$ Density ($M_\odot / \text{pc}^3$)',
@@ -2038,11 +2081,15 @@ def top_down(density: ArrayLike,
              label: str = r'$\rho$',
              color_scale: float | None = None,
              color_scale_center: float = 0,
+             color_norm_min: float | None = None,
+             color_norm_max: float | None = None,
              pin_color_scale_to: ArrayLike | None = None,
              color_bar: bool = False,
              cax: typing.Any | None = None,
              cbar_label: str | None = None,
              cbar_orientation: str = 'vertical',
+             cbar_ticks: typing.Sequence[float] | None = None,
+             cbar_log_tick_labels: bool = False,
              l_ticks: bool = True,
              r_ticks: bool = True,
              r_label: str = r'$r$ (kpc to observer)',
@@ -2072,8 +2119,10 @@ def top_down(density: ArrayLike,
         density_color_scale = density
     else:
         density_color_scale = pin_color_scale_to
-    color_norm_min = density_color_scale.min()
-    color_norm_max = density_color_scale.max()
+    if color_norm_min is None:
+        color_norm_min = density_color_scale.min()
+    if color_norm_max is None:
+        color_norm_max = density_color_scale.max()
     if color_scale is None:
         color_scale = 1 / np.mean(density_color_scale)
     forward = lambda x: np.asinh(color_scale * (x - color_scale_center))
@@ -2082,14 +2131,17 @@ def top_down(density: ArrayLike,
 
     mesh = ax.pcolormesh(lon_edges, r_edges, density, norm=norm, cmap='inferno', shading='auto')
     if color_bar:
-        powers = np.ceil(np.log10(norm.inverse(np.linspace(0, norm(color_norm_max), 10)[1:])))
-        powers = np.unique(powers.astype(np.int32)).astype(np.float32)
-        ticks = np.insert(10. ** powers, 0, 0)
+        if cbar_ticks is None:
+            powers = np.ceil(np.log10(norm.inverse(np.linspace(0, norm(color_norm_max), 10)[1:])))
+            powers = np.unique(powers.astype(np.int32)).astype(np.float32)
+            cbar_ticks = np.insert(10. ** powers, 0, 0)
 
         def format(value: float, pos: int | None) -> str:
-            if value > 0:
+            if value > 0 and cbar_log_tick_labels:
                 exponent = int(np.log10(value))
                 return f'$10^{{{exponent}}}$'
+            elif value > 0:
+                return f'${{{value:.1f}}}$'
             else:
                 return "0"
 
@@ -2101,9 +2153,9 @@ def top_down(density: ArrayLike,
             else:
                 loc = 'bottom'
 
-            cbar = plt.colorbar(mesh, ax=ax, location=loc, ticks=ticks, format=formatter)
+            cbar = plt.colorbar(mesh, ax=ax, location=loc, ticks=cbar_ticks, format=formatter)
         else:
-            cbar = plt.colorbar(mesh, cax=cax, orientation=cbar_orientation, ticks=ticks, format=formatter)
+            cbar = plt.colorbar(mesh, cax=cax, orientation=cbar_orientation, ticks=cbar_ticks, format=formatter)
 
         if cbar_label is not None:
             if cbar_orientation == 'vertical':
