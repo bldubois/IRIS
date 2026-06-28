@@ -85,24 +85,6 @@ def observe_arepo(arepo: torch.Tensor, hyper: hp.Hyper) -> np.ndarray:
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-def downsample_to_shape(cube: np.ndarray, target_shape: tuple[int, ...]) -> np.ndarray:
-    if cube.shape == target_shape:
-        return cube
-    if cube.ndim != len(target_shape):
-        raise ValueError(f'Cannot downsample cube with shape {cube.shape} to {target_shape}.')
-
-    ratios = tuple(source // target for source, target in zip(cube.shape, target_shape))
-    if all(source == target * ratio for source, target, ratio in zip(cube.shape, target_shape, ratios)):
-        reshape_shape = []
-        for target, ratio in zip(target_shape, ratios):
-            reshape_shape.extend((target, ratio))
-        axes = tuple(range(1, 2 * cube.ndim, 2))
-        return cube.reshape(reshape_shape).mean(axis=axes)
-
-    tensor = torch.tensor(cube, dtype=torch.float32).reshape((1, 1) + cube.shape)
-    resized = torch.nn.functional.interpolate(tensor, size=target_shape)
-    return resized.numpy()[0][0]
-
 def side_by_side_pair(top_down: np.ndarray,
                       left_cube: np.ndarray,
                       right_cube: np.ndarray,
@@ -142,7 +124,7 @@ def run_test_a(datasets: dict[int, ap.StandardDataset],
     test_a_dir.mkdir(parents=True, exist_ok=True)
     for low, high in zip(R_STEPS_SERIES[:-1], R_STEPS_SERIES[1:]):
         low_cube = observations[low]
-        high_cube = downsample_to_shape(observations[high], low_cube.shape)
+        high_cube = observations[high]
         side_by_side_pair(top_down=top_downs[low],
                           left_cube=low_cube,
                           right_cube=high_cube,
@@ -175,7 +157,7 @@ def run_test_b(default_arepo: torch.Tensor,
     test_b_dir.mkdir(parents=True, exist_ok=True)
     for low, high in zip(V_SUBSAMPLE_SERIES[:-1], V_SUBSAMPLE_SERIES[1:]):
         low_cube = observations[low]
-        high_cube = downsample_to_shape(observations[high], low_cube.shape)
+        high_cube = observations[high]
         side_by_side_pair(top_down=default_top_down,
                           left_cube=low_cube,
                           right_cube=high_cube,
