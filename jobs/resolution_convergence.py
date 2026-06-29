@@ -128,8 +128,8 @@ def run_test_a(datasets: dict[int, ap.StandardDataset],
         side_by_side_pair(top_down=top_downs[low],
                           left_cube=low_cube,
                           right_cube=high_cube,
-                          left_name=f'r_steps={low}',
-                          right_name=f'r_steps={high}',
+                          left_name=rf'$r = {low}$',
+                          right_name=rf'$r = {high}$',
                           hyper=hypers[low],
                           path=test_a_dir / f'r_steps_{low}_vs_{high}.png')
 
@@ -161,8 +161,8 @@ def run_test_b(default_arepo: torch.Tensor,
         side_by_side_pair(top_down=default_top_down,
                           left_cube=low_cube,
                           right_cube=high_cube,
-                          left_name=f'v_subsamples={low}',
-                          right_name=f'v_subsamples={high}',
+                          left_name=rf'$f = {low}$',
+                          right_name=rf'$f = {high}$',
                           hyper=hypers[low],
                           path=test_b_dir / f'v_subsamples_{low}_vs_{high}.png')
 
