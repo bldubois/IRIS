@@ -853,11 +853,20 @@ class IteratedObserver(Observer):
             such as full-cone observations, however, CPU batching prevents a CUDA OOM error from
             the physical tensor itself exceeding GPU memory capacity. For CPU batching, `in_blur`
             is applied separately by the base observer over each ray batch.
+            This option concerns the observer input. Contrast with `cpu_out`, which concerns the
+            observer output. For the greatest level of CUDA memory optimization,
+            also set `cpu_out = True`.
+        cpu_out: If `True`, moves each observed ray batch to the CPU prior to final concatenation.
+            For extraordinarily large observations that exceed CUDA memory even as a reduced
+            PPV cube, this option prevents a CUDA OOM error. Note that this option concerns
+            the observer output. Contrast with `cpu_batch`, which concerns the observer output.
+            For the greatest level of CUDA memory optimization, also set `cpu_batch = True`.
 
     Args:
         hyper: A hyperparameters object.
         *args: Catch-all for args passed by extending classes or to extended classes.
         cpu_batch: Sets `self.cpu_batch`.
+        cpu_out: Sets `self.cpu_out`.
         **kwargs: Catch-all for keyword args passed by extending classes or to extended classes.
     """
 
@@ -867,10 +876,16 @@ class IteratedObserver(Observer):
     lat_steps: int
     v_subsamples: int
     cpu_batch: bool
+    cpu_out: bool
 
-    def __init__(self, hyper: hp.Hyper, *args: any, cpu_batch: bool = False, **kwargs: any) -> None:
+    def __init__(self,
+                 hyper: hp.Hyper,
+                 *args: any,
+                 cpu_batch: bool = False,
+                 cpu_out: bool = False,
+                 **kwargs: any) -> None:
         super().__init__(hyper,
-                         *args, 
+                         *args,
                          cpu_batch=cpu_batch,
                          **kwargs)
         self.lon_pieces = hyper.observer_hyper.lon_pieces
@@ -879,6 +894,7 @@ class IteratedObserver(Observer):
         self.lat_steps = hyper.coordinate_hyper.lat_steps
         self.v_subsamples = hyper.observer_hyper.v_subsamples
         self.cpu_batch = cpu_batch
+        self.cpu_out = cpu_out
         return
 
     def forward(self,
@@ -950,6 +966,8 @@ class IteratedObserver(Observer):
                                                   bypass_blur_in=bypass_blur_in,
                                                   transfer=transfer,
                                                   **kwargs)
+                if self.cpu_out:
+                    observed_bundle = observed_bundle.cpu()
                 group.append(observed_bundle)
                 del ray_batch
             lon_groups.append(torch.cat(group, dim=3))
