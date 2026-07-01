@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 # See the LICENSE file for details
 """
-Generate high-resolution web figures.
+Make web figures.
 """
 
 import os
