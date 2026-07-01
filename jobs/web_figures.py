@@ -473,6 +473,11 @@ def make_observation_hyper() -> hp.Hyper:
     hyper.coordinate_hyper.r_pieces = 64
     hyper.observer_hyper.lon_pieces = 64
     hyper.observer_hyper.lat_pieces = 256
+    hyper.observer_hyper.blur_inputs = True
+    hyper.observer_hyper.blur_kernel_r = 3
+    hyper.observer_hyper.blur_kernel_lon = 81
+    hyper.observer_hyper.blur_kernel_lat = 21
+    hyper.observer_hyper.out_blur_fwhm = None
     hyper.validate()
     return hyper
 

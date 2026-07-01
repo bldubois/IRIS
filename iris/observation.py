@@ -1093,6 +1093,8 @@ class IteratedSyntheticObserver(IteratedObserver, SyntheticObserver):
         observed = super().forward(inputs, *args, bypass_blur_out=True, **kwargs)
         with nullcontext() if self.differentiable_abundance else torch.no_grad():
             if not bypass_blur_out and self.out_blur is not None:
+                if self.cpu_out:
+                    self.out_blur.cpu()
                 observed = self.out_blur(observed)
         return observed
 
