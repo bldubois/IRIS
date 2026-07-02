@@ -9,11 +9,12 @@ observational data and galaxy simulations. The IRIS code serves three primary fu
 (iii) training a custom-designed, deep convolutional neural network to "revert"
 observations into top-down density maps of the observed field.
 The method and results of the project are described in full in the IRIS publication,
-currently in preprint at [LINK]. 
+currently in preprint at [LINK COMING SOON]. 
 
 ## Installation, Usage, and Documentation
 
-A complete documentation of the IRIS code is provided at [LINK].
+A complete documentation of the IRIS code is provided at
+https://bldubois.com/IRIS/.
 Included in the documentation is an installation and usage guide,
 for those interested in reproducing the results of the IRIS paper,
 or in collaborating on future development of the IRIS project.
@@ -46,4 +47,4 @@ IRIS project to direct their inquiries to Dr. Battersby.
 All IRIS code is under the copyright of the University of Connecticut, released
 for open-source usage under the MIT license (see LICENSE.md). We ask that any research
 referencing any element of the IRIS code or results cite the primary IRIS paper,
-currently in preprint at [LINK]. 
+currently in preprint at [LINK COMING SOON]. 

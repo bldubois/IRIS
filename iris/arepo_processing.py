@@ -2019,7 +2019,7 @@ class SyntheticallyObservedDataset(PreObservedDataset):
 
     Uses [`SyntheticObserver`][iris.observation.SyntheticObserver] to compute true synthetic
     observations of each physical tensor in the dataset. Contrast with
-    [`SimplyObservedDataset`][iris.observation.SimplyObservedDataset], which only computes
+    [`SimplyObservedDataset`][iris.arepo_processing.SimplyObservedDataset], which only computes
     [simple observations][iris.observation.SimpleObserver] (density projections).
     The primary dataset type for [`Reverter`][iris.reversion.Reverter] training.
 

@@ -769,8 +769,9 @@ class ObserverHyper(DataClass):
             transfer. Each fine step represents the midpoint of a step in the post-transfer velocity
             integration via Simpson's Rule. The total number of points in the fine velocity grid is
             `2 * v_steps * v_subsamples + 1`. See
-            [`ObservabilityProcessor`][iris.observation.ObservabilityProcessor] and
-            [`_optically_thick_transfer`][iris.observation.TransferProcessor._optically_thick_transfer].
+            [`ObservabilityProcessor`][iris.observation.ObservabilityProcessor],
+            [`_optically_thick_transfer_formal`][iris.observation.TransferProcessor._optically_thick_transfer_formal], and
+            [`_optically_thick_transfer_bdf2][iris.observation.TransferProcessor._optically_thick_transfer_bdf2].
         blur_inputs: If `True`, applies an input-blur over the velocity channel of a physical tensor
             prior to [observation][iris.observation.Observer] and
             [top-down density image reduction][iris.arepo_processing.columnize_physical_tensor].
@@ -932,7 +933,7 @@ class ObserverHyper(DataClass):
 
 
 class CubeHyper(DataClass):
-    """
+    r"""
     Contains all hyperparameters pertaining to [cube processing][iris.cube_processing].
 
     Attributes:

@@ -775,7 +775,7 @@ def _make_population_grids(hyper: hp.Hyper,
 def make_observability_grids(hyper: hp.Hyper,
                              units: str,
                              node_comm: mpi4py.MPI.Intracomm | None = None) -> list[TracerData]:
-    """
+    r"""
     Computes the emission and absorption coefficients of each tracer over a grid of
     total H number density, $\text{H}_2$ abundance, and temperature.
 

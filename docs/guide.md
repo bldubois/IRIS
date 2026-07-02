@@ -3,11 +3,16 @@
 **Author:** B.L. DuBois
 **Updated:** 1 July 2026
 
-Welcome to the official IRIS documentation. In the other tabs of this page, you can
-find a detailed description of the entire IRIS sourcecode for future developers.
+Welcome to the official documentation for Imagery Reversion Informed by Simulation (IRIS).
+For a detailed description of the IRIS project, see the README at the
+official GitHub repository (https://github.com/bldubois/IRIS) as well as the
+preprint publication ([LINK COMING SOON]). 
+
 In the sections below, you can find a guide for installation and usage of the IRIS code.
 This guide is intended for those aiming to reproduce the results of the IRIS paper,
 or for those collaborating on future research relating to the IRIS project.
+In the other tabs on this page, you can find a detailed description of the
+entire IRIS sourcecode for future developers.
 
 ## 1. Installation
 

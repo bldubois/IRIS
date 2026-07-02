@@ -976,7 +976,7 @@ class IteratedObserver(Observer):
 
 
 class IteratedSyntheticObserver(IteratedObserver, SyntheticObserver):
-    """
+    r"""
     Iteratively ray-batches a synthetic observation by extending both
     [`IteratedObserver`][iris.observation.IteratedObserver] and
     [`SyntheticObserver`][iris.observation.SyntheticObserver].
@@ -2070,16 +2070,16 @@ class TransferProcessor(torch.nn.Module):
                 units: str = 'Trj',
                 transfer: str = 'optically thick',
                 integration: str = 'smooth') -> torch.Tensor:
-        """
+        r"""
         A wrapper method for a radiative transfer solution.
 
         Based on the args `transfer` and `integration`, calls one of:
 
-        * [`_optically_thick_transfer`][iris.observation.TransferProcessor._optically_thick_transfer],
+        * [`_optically_thick_transfer_formal`][iris.observation.TransferProcessor._optically_thick_transfer_formal],
         * [`_optically_thick_transfer_bdf2`][iris.observation.TransferProcessor._optically_thick_transfer_bdf2],
-        * [`_selectively_thin_transfer`][iris.observation.TransferProcessor._selectively_thin_transfer],
+        * [`_selectively_thin_transfer_formal`][iris.observation.TransferProcessor._selectively_thin_transfer_formal],
         * [`_selectively_thin_transfer_bdf2`][iris.observation.TransferProcessor._selectively_thin_transfer_bdf2],
-        * [`_optically_thin_transfer`][iris.observation.TransferProcessor._optically_thin_transfer], or
+        * [`_optically_thin_transfer_formal`][iris.observation.TransferProcessor._optically_thin_transfer_formal], or
         * [`_optically_thin_transfer_simpson`][iris.observation.TransferProcessor._optically_thin_transfer_simpson].
 
         Args:
@@ -3408,7 +3408,7 @@ class TransferProcessor(torch.nn.Module):
 class VelocityBlur(torch.nn.Module):
     """
     Applies a Gaussian convolution over the velocity channel of a
-    [physical tensor][iris.arepo_processing.make_physical_tensor].
+    [physical tensor][iris.arepo_processing.Snapshot.make_physical_tensor].
         
     Intended use is as an [`Observer.in_blur`][iris.observation.Observer] applied to
     a physical tensor prior to observation. The nearest-neighbor
@@ -3478,7 +3478,7 @@ class VelocityBlur(torch.nn.Module):
         with the Gaussian kernel (`self.velocity_convolution`).
 
         Args:
-            physical_tensor: The input [physical tensor][iris.arepo_processing.make_physical_tensor]
+            physical_tensor: The input [physical tensor][iris.arepo_processing.Snapshot.make_physical_tensor]
                 to be blurred.
             inplace: If `True`, performs the blur in-place over the input physical tensor.
 
@@ -3504,7 +3504,7 @@ class VelocityBlur(torch.nn.Module):
         onto any one dimension is a single-variable Gaussian of identical standard deviation,
         set as `self.sigma`. The sum of all kernel values
         is normalized to 1 such that the velocity value of any pixel in the output
-        [physical tensor][iris.arepo_processing.make_physical_tensor] becomes the
+        [physical tensor][iris.arepo_processing.Snapshot.make_physical_tensor] becomes the
         Gaussian-weighted average of its neighborhood.
 
         Args:
