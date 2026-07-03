@@ -1,4 +1,5 @@
 site_name: IRIS Docs
+site_url: https://bldubois.github.io/IRIS/
 site_author: B.L. DuBois
 copyright: 'Copyright &copy; 2026 University of Connecticut. Created by B.L. DuBois. Licensed under MIT.'
 theme:
@@ -9,7 +10,7 @@ theme:
     - content.code.copy
 
 nav:
-  - Installation and Usage Guide: guide.md
+  - Installation and Usage Guide: index.md
   - Hyperparameters: reference/hyper.md
   - AREPO Processing: reference/arepo_processing.md
   - AREPO Dataset Writing: reference/arepo_processing_write.md
