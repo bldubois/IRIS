@@ -6,7 +6,7 @@
 Welcome to the official documentation for Imagery Reversion Informed by Simulation (IRIS).
 For a detailed description of the IRIS project, see the README at the
 official GitHub repository (https://github.com/bldubois/IRIS) as well as the
-preprint publication ([LINK COMING SOON]). 
+preprint publication (https://arxiv.org/abs/2607.01338). 
 
 In the sections below, you can find a guide for installation and usage of the IRIS code.
 This guide is intended for those aiming to reproduce the results of the IRIS paper,
