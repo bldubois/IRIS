@@ -1,5 +1,3 @@
-.idea/
-
 data/*
 !data/.gitkeep
 
@@ -9,4 +7,4 @@ models/*
 output/*
 !output/.gitkeep
 
-iris-offline-docs/
+misc/*
